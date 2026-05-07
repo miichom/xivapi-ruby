@@ -9,7 +9,7 @@ If you need help or run into any issues, please [open an issue](https://github.c
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'xivapi, git: 'https://github.com/xivapi/xivapi-ruby.git', tag: 'v0.4.0'
+gem 'xivapi', git: 'https://github.com/xivapi/xivapi-ruby.git', tag: 'v0.4.0'
 ```
 
 Then run the following in your terminal:

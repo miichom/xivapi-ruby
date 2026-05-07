@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Matt Antonelli"]
   spec.email = ["matt@antonelli.dev"]
 
-  spec.summary = "An asynchronous Ruby client gem for working with [XIVAPI](https://v2.xivapi.com/)"
-  spec.description = "An asynchronous Ruby client gem for working with [XIVAPI](https://v2.xivapi.com/)"
+  spec.summary = "An asynchronous Ruby client gem for working with XIVAPI"
+  spec.description = "An asynchronous Ruby client gem for working with XIVAPI"
   spec.homepage = "https://github.com/xivapi/xivapi-ruby"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.3.0"

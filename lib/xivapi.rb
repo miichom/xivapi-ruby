@@ -1,59 +1,67 @@
-require 'xivapi/version'
+# frozen_string_literal: true
 
-require 'xivapi/errors'
-require 'xivapi/http'
-require 'xivapi/page'
-require 'xivapi/paginator'
-require 'xivapi/request'
+require_relative "xivapi/version" # The version of the gem
 
-require 'rest-client'
-require 'json'
-require 'ostruct'
+require_relative "xivapi/assets"
+require_relative "xivapi/sheets"
+require_relative "xivapi/versions"
 
-# Base module for the XIVAPI library
+require "uri"
+require "net/http"
+require "json"
+
 module XIVAPI
-  include XIVAPI::Errors
+  # Known languages supported by the gata data format.
+  LANGUAGE_CODES = %w[ja en de fr chs cht kr].freeze
 
-  # The allowed language options
-  LANGUAGE_OPTIONS = %w(en ja de fr cn kr).freeze
-
-  # Client for making requests to XIVAPI
+  # An asynchronous Ruby wrapper for XIVAPI.
   class Client
-    include XIVAPI::Request
+    attr_accessor :logger, :verbose, :version
 
-    # @return [String] The API key
-    attr_accessor :api_key
-
-    # @return [true, false] Whether or not to query the staging API instead of production
-    attr_accessor :staging
-
-    # Initializes a new client for querying XIVAPI
-    # @param api_key [String] API key provided by XIVAPI
-    # @param language [String] Requested response langauge
-    # @param staging [true, false] Whether or not to query the staging API instead of production
-    def initialize(api_key: nil, language: :en, staging: false)
-      @api_key = api_key
-
+    # Initialize a new client for making API requests.
+    # @param language [String] The supported by the gata data format
+    # @param version [String] The supported version of the game to use for the API.
+    # @param verbose [true, false] Whether to enable verbose logging.
+    def initialize(language = "en", version = "latest", verbose = false)
       self.language = language
-      self.staging = staging
+      @version = version
+      @verbose = verbose
     end
 
-    # @return [String] The language
-    def language
-      @language
-    end
+    # @return [String] The supported by the gata data format
+    attr_reader :language
 
     # @param language [String, Symbol] The language to set for the client
-    # @return The language
+    # @return The supported by the gata data format
     def language=(language)
       lang = language.to_s.downcase
-      raise ArgumentError, 'Unsupported language' unless LANGUAGE_OPTIONS.include?(lang)
+      raise ArgumentError, "Unsupported language" unless LANGUAGE_CODES.include?(lang)
+
       @language = lang
     end
 
-    # @return [Hash] The default parameters for the client
-    def default_params
-      { private_key: @api_key, language: @language }
+    def search(params = {})
+      request("search", params)
+    end
+
+    def request(path, params = {})
+      merged = { language: @language, version: @version }.merge(params)
+
+      uri = URI.join("https://v2.xivapi.com/api/", path)
+      uri.query = URI.encode_www_form(merged.compact) unless merged.empty?
+      puts "=> #{uri}" if @verbose
+      response = Net::HTTP.get_response(uri)
+      raise response.error! unless response.is_a?(Net::HTTPSuccess)
+
+      if response.content_type&.include?("application/json")
+        json = JSON.parse(response.body)
+
+        raise json["error"].to_s if json.is_a?(Hash) && json["error"]
+
+        json
+      else
+        response.body
+      end
     end
   end
 end

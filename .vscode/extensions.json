@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "shopify.ruby-extensions-pack",
+        "misogi.ruby-rubocop",
+        "castwide.solargraph"
+    ]
+}

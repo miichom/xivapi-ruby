@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require "bundler/setup"
 require "xivapi"
 
 require "irb"
-@client = XIVAPI::Client.new
 IRB.start(__FILE__)

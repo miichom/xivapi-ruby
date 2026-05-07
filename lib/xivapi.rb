@@ -45,7 +45,7 @@ module XIVAPI
     end
 
     def request(path, params = {})
-      merged = { language: @language, version: @version }.merge(params)
+      merged = {language: @language, version: @version}.merge(params)
 
       uri = URI.join("https://v2.xivapi.com/api/", path)
       uri.query = URI.encode_www_form(merged.compact) unless merged.empty?

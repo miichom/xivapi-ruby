@@ -27,13 +27,6 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", ">= 4.0"
-  spec.add_development_dependency "rake", "~> 13.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "rubocop", "~> 1.21"
-  spec.add_development_dependency "rubocop-rake", "~> 0.7.1"
-  spec.add_development_dependency "rubocop-rspec", "~> 3.9"
-  spec.add_development_dependency "solargraph", ">= 0.58"
   spec.add_dependency "net-http", "~> 0.9.1"
   spec.metadata["rubygems_mfa_required"] = "true"
 end

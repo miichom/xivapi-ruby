@@ -1,9 +1,6 @@
-AllCops:
-  NewCops: enable
-  TargetRubyVersion: 3.3
-
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
-
-Style/StringLiteralsInInterpolation:
-  EnforcedStyle: double_quotes
+plugins:
+  - rubocop-rake
+require:
+  - standard
+inherit_gem:
+  standard: config/base.yml

@@ -11,14 +11,14 @@ module XIVAPI
     # @param params [Hash] Query parameters accepted by the asset endpoint.
     # @return [Buffer, String] An image of the specified asset in the specified format.
     def get(params = {})
-      self.client.request("asset", params)
+      client.request("asset", params)
     end
 
     # Retrieve the specified map, composing it from split source files if necessary.
     # @param params [Hash] Query parameters accepted by the map endpoint.
     # @return [Buffer, String] An image of the specified map in the specified format.
     def map(territory, index, params = {})
-      self.client.request("asset/map/#{territory}/#{index}", params)
+      client.request("asset/map/#{territory}/#{index}", params)
     end
   end
 end

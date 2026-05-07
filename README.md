@@ -1,15 +1,15 @@
 # xivapi-ruby
 
-An asynchronous Ruby client gem for working with [XIVAPI v2](https://v2.xivapi.com/), providing access to Final Fantasy XIV game data. It lets you fetch, search, and work with FFXIV data using a clean, modern Ruby gem interface.
+An asynchronous Ruby client gem for working with [XIVAPI](https://v2.xivapi.com/), providing access to Final Fantasy XIV game data. It lets you fetch, search, and work with FFXIV data using a clean, modern Ruby gem interface.
 
-If you need help or run into any issues, please [open an issue](https://github.com/miichom/xivapi-ruby/issues) on GitHub or join the [XIVAPI Discord server](https://discord.gg/MFFVHWC) for support.
+If you need help or run into any issues, please [open an issue](https://github.com/xivapi/xivapi-ruby/issues) on GitHub or join the [XIVAPI Discord server](https://discord.gg/MFFVHWC) for support.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'xivapi, git: 'https://github.com/miichom/xivapi-ruby.git', tag: 'v0.4.0'
+gem 'xivapi, git: 'https://github.com/xivapi/xivapi-ruby.git', tag: 'v0.4.0'
 ```
 
 Then run the following in your terminal:
@@ -20,7 +20,18 @@ bundle install
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+# Client inialization
+client = XIVAPI::Client.new
+client = XIVAPI::Client.new(language: "jp", version: "7.0", verbose: true)
+
+# Raw requests
+client.request("/sheet/Item/1")
+
+# Or using typed endpoints
+sheets = XIVAPI::Sheets.new(client) # ~ must pass the client
+sheets.get("Item", 1)
+```
 
 ## Development
 
@@ -30,7 +41,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/xivapi. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/xivapi/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/miichom/xivapi. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/xivapi/xivapi-ruby/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -38,4 +49,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Xivapi project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/xivapi/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the Xivapi project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/xivapi/xivapi-ruby/blob/main/CODE_OF_CONDUCT.md).

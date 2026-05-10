@@ -14,13 +14,10 @@ Gem::Specification.new do |spec|
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.3.0"
 
-  gemspec = File.basename(__FILE__)
+  spec.require_paths = ["lib"]
   spec.files = Dir.chdir(File.expand_path("..", __FILE__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
-  spec.bindir = "exe"
-  spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
 
   spec.add_dependency "net-http", "~> 0.9.1"
   spec.metadata["rubygems_mfa_required"] = "true"

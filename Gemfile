@@ -9,6 +9,7 @@ gem "rubocop-rspec", "~> 3.9", group: :development
 gem "rubocop-rake", "~> 0.7.1", group: :development
 gem "solargraph", ">= 0.58", group: :development
 gem "standard", ">= 1.35.1", group: :development
+gem "yard", group: :development
 
 # Specify your gem's dependencies in xivapi.gemspec
 gemspec

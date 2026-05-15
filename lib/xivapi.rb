@@ -40,10 +40,17 @@ module XIVAPI
       @language = lang
     end
 
+    # Fetch information about rows and their related data that match the provided search query.
+    # @param params [Hash] Query paramters accepted by the search endpoint.
+    # @return [Hash] Response structure for the search endpoint.
     def search(params = {})
       request("search", params)
     end
 
+    # Make a raw request to the API at the specified path with the specified parameters.
+    # @param path [String] The path to make the request to, relative to the base API URL.
+    # @param params [Hash] The query parameters to include in the request.
+    # @return [Hash, String] The parsed JSON response or a bytestring of the response body if the content type is not JSON.
     def request(path, params = {})
       merged = {language: @language, version: @version}.merge(params)
 

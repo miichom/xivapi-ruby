@@ -3,6 +3,9 @@ module XIVAPI
   class Assets
     attr_accessor :client
 
+    # Initialize a new Assets client for making API requests.
+    # @param client [XIVAPI::Client] The client to use for making API
+    # @return [XIVAPI::Assets] A new Assets client instance.
     def initialize(client)
       @client = client
     end

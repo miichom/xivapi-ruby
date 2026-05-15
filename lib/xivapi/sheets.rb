@@ -2,6 +2,9 @@ module XIVAPI
   class Sheets
     attr_accessor :client
 
+    # Initialize a new Sheets client for making API requests.
+    # @param client [XIVAPI::Client] The client to use for making API
+    # @return [XIVAPI::Sheets] A new Sheets client instance.
     def initialize(client)
       @client = client
     end

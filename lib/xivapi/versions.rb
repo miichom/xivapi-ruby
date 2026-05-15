@@ -3,6 +3,9 @@ module XIVAPI
   class Versions
     attr_accessor :client
 
+    # Initialize a new Versions client for making API requests.
+    # @param client [XIVAPI::Client] The client to use for making API
+    # @return [XIVAPI::Versions] A new Versions client instance.
     def initialize(client)
       @client = client
     end

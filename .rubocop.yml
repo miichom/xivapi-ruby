@@ -2,5 +2,7 @@ plugins:
   - rubocop-rake
 require:
   - standard
+Layout/EndOfLine:
+  EnforcedStyle: lf 
 inherit_gem:
   standard: config/base.yml

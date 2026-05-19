@@ -27,6 +27,7 @@ client = XIVAPI::Client.new(language: "jp", version: "7.0", verbose: true)
 
 # Raw requests
 client.request("/sheet/Item/1")
+client.request("/sheet/Item/1", language: "jp", version: "7.0") # optional
 
 # Or using typed endpoints
 sheets = XIVAPI::Sheets.new(client) # ~ must pass the client

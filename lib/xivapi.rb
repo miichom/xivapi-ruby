@@ -53,6 +53,11 @@ module XIVAPI
     # @return [Hash, String] The parsed JSON response or a bytestring of the response body if the content type is not JSON.
     def request(path, params = {})
       merged = {language: @language, version: @version}.merge(params)
+      if merged.any? { |k, v| v.nil? }
+        raise ArgumentError, "Nil values are not allowed in query parameters"
+      elsif merged[:verbose] == true
+        raise ArgumentError, "Verbose mode is not supported as a query parameter. Set verbose mode on the client instance instead."
+      end
 
       uri = URI.join("https://v2.xivapi.com/api/", path)
       uri.query = URI.encode_www_form(merged.compact) unless merged.empty?
